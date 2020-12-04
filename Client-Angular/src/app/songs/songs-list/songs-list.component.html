@@ -1,0 +1,151 @@
+<div class="container">
+
+  <input class="search-bar" placeholder="Search.." type="text" [(ngModel)]='searchBy'>
+
+</div>
+
+<mat-tab-group (selectedTabChange)="onPlaylistPanelSelected($event)">
+  <mat-tab label="Songs">
+    <div class="container">
+      <button mat-raised-button class="song-upload-button" *ngIf='isAuth' (click)="showAddSongDialog()">
+        <mat-icon>add_box</mat-icon>Upload new Song
+      </button>
+    </div>
+    <div>
+      <h3 class="filter">Filter: Most Reviewd Songs</h3>
+      <mat-accordion>
+        <ng-container  *ngFor='let song of searchedSongs  | slice:0:10; let i=index'>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"  *ngIf='11>i'>
+          <mat-expansion-panel-header>
+
+            <mat-panel-title class="title">
+              <mat-icon>music_note</mat-icon>
+              {{ song.songTitle }}
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <span><label>Album:</label>{{ song.album }}</span>
+          <span><label>Artist:</label>{{ song.artist }}</span>
+          <span><label>Year:</label>{{ song.year }}</span>
+          <span><label>Genre:</label>{{ song.genre }}</span>
+          <button mat-raised-button *ngIf='isAuth' (click)="openBottomSheet(song.songId)">
+            <mat-icon>playlist_add</mat-icon>Add to Playlist
+          </button>
+          <button mat-raised-button *ngIf='(isAdmin && song.visibility)'
+            (click)="toggleSongVisibility('hide',song.songId)">
+            <mat-icon>visibility_off</mat-icon>Hide Song
+          </button>
+          <button mat-raised-button *ngIf='(isAdmin && !song.visibility)'
+            (click)="toggleSongVisibility('show',song.songId)">
+            <mat-icon>visibility</mat-icon>Show Song
+          </button>
+          
+          <app-review [songId]='song.songId' [isAuth]='isAuth'></app-review>
+
+        </mat-expansion-panel>
+      </ng-container>
+      </mat-accordion>
+    </div>
+  </mat-tab>
+  <mat-tab label="Playlist">
+    <div class="container">
+      <button mat-raised-button class="song-upload-button" *ngIf='isAuth'
+        (click)="showCreatePlaylistDialog('create',null)">
+        <mat-icon>playlist_add</mat-icon>Create Playlist
+      </button>
+    </div>
+
+    <div class="" *ngIf='isAuth'>
+      <span class="filter">My Playlists</span>
+
+      <mat-grid-list cols="3" rowHeight="220px">
+        <div *ngFor='let playlist of playlists'>
+          <mat-grid-tile *ngIf='authUser.email == playlist.createdBy'>
+            <mat-card>
+              <div class="card-container" (click)="showPlaylistDialog($event,playlist.listId)">
+                <mat-card-title class='title'>
+                  <mat-icon>library_music</mat-icon>{{playlist.listTitle}}
+                </mat-card-title>
+                <mat-card-subtitle>{{playlist.listDesc}}</mat-card-subtitle>
+                <mat-card-content>
+                  <span><label>Songs:</label> {{playlist.songs.length}}</span><br>
+                  <span><label>By:</label>{{ playlist.createdBy}}</span>
+                </mat-card-content>
+              </div>
+              <mat-card-actions>
+                <button mat-raised-button *ngIf='isAuth' (click)="showCreatePlaylistDialog('edit',playlist.listId)">
+                  <mat-icon>edit</mat-icon>Edit
+                </button>
+                <button mat-raised-button *ngIf='isAuth && playlist.visibility'
+                  (click)="togglePlaylistVisibility('hide',playlist.listId)">
+                  <mat-icon>visibility_off</mat-icon>Hide Playlist
+                </button>
+                <button mat-raised-button *ngIf='isAuth && !playlist.visibility'
+                  (click)="togglePlaylistVisibility('show',playlist.listId)">
+                  <mat-icon>visibility</mat-icon>Show Playlist
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </mat-grid-tile>
+        </div>
+
+      </mat-grid-list>
+
+    </div>
+    <h3 class="filter">All Playlists</h3>
+
+    <mat-grid-list cols="3" rowHeight="200px">
+      <div *ngFor='let playlist of searchedPlaylists'>
+        <mat-grid-tile *ngIf='!isAuth || (isAuth && authUser.email != playlist.createdBy)'>
+          <mat-card>
+            <div class="card-container" (click)="showPlaylistDialog($event,playlist.listId)">
+              <mat-card-title class='title'>
+                <mat-icon>library_music</mat-icon> {{playlist.listTitle}}
+              </mat-card-title>
+              <mat-card-subtitle>{{playlist.listDesc}}</mat-card-subtitle>
+              <mat-card-content>
+                <span><label>Songs:</label> {{playlist.songs.length}}</span><br>
+                <span><label>By:</label>{{ playlist.createdBy}}</span>
+              </mat-card-content>
+            </div>
+            <mat-card-actions>
+            </mat-card-actions>
+          </mat-card>
+
+        </mat-grid-tile>
+      </div>
+
+
+    </mat-grid-list>
+  </mat-tab>
+
+  <mat-tab *ngIf='(isAdmin)' label="Users">
+
+
+    <mat-card *ngFor='let user of searchedApplicationUsers'>
+      <mat-card-title class='title'>
+        <mat-icon>supervised_user_circle</mat-icon>{{user.name}}
+      </mat-card-title>
+      <mat-card-content>
+        <span><label>Email:</label> {{user.email}}</span>
+        <span><label>Role:</label>{{ user.role}}</span>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button *ngIf='user.status =="activated"'
+          (click)="toggleUserStatus('deactivated',user)">Deactivate</button>
+        <button mat-raised-button *ngIf='user.status =="deactivated"'
+          (click)="toggleUserStatus('activated',user)">Activate</button>
+        <button mat-raised-button *ngIf='user.role =="admin"' (click)="toggleAdminAccess('non-admin',user)">Revoke
+          Access</button>
+        <button mat-raised-button *ngIf='user.role =="non-admin"' (click)="toggleAdminAccess('admin',user)">Grant
+          Access</button>
+      </mat-card-actions>
+
+    </mat-card>
+
+
+  </mat-tab>
+
+</mat-tab-group>

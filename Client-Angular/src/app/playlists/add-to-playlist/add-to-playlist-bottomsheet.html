@@ -1,0 +1,6 @@
+<mat-card *ngFor='let playlist of playlistsToshow'>
+        <mat-card-content>
+                <span><b>{{playlist.listTitle}}</b></span>
+                <button class="plbutton" (click)='addSongToPlaylist(playlist)'>Add</button>
+        </mat-card-content>
+</mat-card>

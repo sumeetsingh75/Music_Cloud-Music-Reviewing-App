@@ -1,0 +1,12 @@
+.mat-card{
+    box-shadow: none;
+    border-bottom: 1px solid #b5a0a0;
+    border-radius: unset;
+}
+.plbutton{
+    float:right;
+    background: white;
+    border: 1px solid #7c86bb;
+    border-radius: 4px;
+    cursor: pointer;
+}

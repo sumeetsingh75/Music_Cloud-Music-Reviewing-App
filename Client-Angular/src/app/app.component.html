@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <div>Music Cloud</div>
+
+  <div class = "navbar"><ul>
+    <li><a [routerLink]="['/login']"  *ngIf = '!navService.isloggedin'>Sign in</a></li>
+    <li *ngIf = 'navService.isloggedin'><p><span *ngIf = 'navService.loggedInUser.role == "admin"'>Admin</span>  {{navService.loggedInUser.name}}</p></li>
+    <li>  <button mat-raised-button *ngIf = 'navService.isloggedin' (click) = 'logout()'  >Logout</button></li>
+  </ul>
+ </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+
+
+

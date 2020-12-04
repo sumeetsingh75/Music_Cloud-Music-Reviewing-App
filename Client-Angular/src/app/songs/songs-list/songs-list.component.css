@@ -1,0 +1,69 @@
+.container{
+    width:fit-content;
+    margin: auto;
+}
+
+.search-bar{
+    padding: 10px 10px;
+    margin: 40px 30px;
+    width: 500px;
+    height: auto;
+    display: inline-block;
+    border: 1px solid #7c86bb;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.title{
+    font-weight: 500;
+    font-size: 23px;
+    font-family: monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: black;
+}
+span{
+    font-size: 20px;
+    padding-right: 40px;
+    font-family: sans-serif;
+}
+label{
+    font-weight: 550;
+    padding: 10px 0px;
+}
+
+.song-upload-button{
+    margin:10px 10px;
+    background: bisque;
+    border: 1px solid darkgray;
+    border-radius: 30px;
+}
+
+.card-container{
+    cursor: pointer;
+}
+
+.mat-expansion-panel {
+ margin-top: 5px;
+ border: 1px solid #6173cf;
+}
+.mat-icon{
+    padding: 3px;
+    margin: inherit;
+
+}
+.mat-card{
+    margin-top: 2px;
+    border: 1px solid #6173cf;
+}
+.filter{
+    padding-left: 10px;
+    font-size: 20px;
+    font-family: monospace;
+}
+
+.mat-grid-tile .mat-card{
+    width:90%;
+    background: #eef0fa;
+}
+
+

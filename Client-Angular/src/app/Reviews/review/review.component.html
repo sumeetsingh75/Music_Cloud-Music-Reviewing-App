@@ -1,0 +1,25 @@
+<hr>
+<h4>Reviews</h4>
+
+<div *ngIf='reviews.length>0  else noreviews'>
+        <p id="info"><span>Number of Reviews:{{reviews.length}} </span><span> Average Rating:{{avgRating}} </span></p>
+        <div class="review-container" *ngFor='let review of reviews'>
+                <div class="inline-show"><span><b>{{review.submitedBy}}</b></span><span>{{review.reviewDesc}}</span>
+
+                </div>
+
+                <div class="inline-show  ">
+                        <star-rating class="star" [value]='review.rating' checkedcolor="black" uncheckedcolor="white"
+                                size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+                </div>
+        </div>
+</div>
+
+<ng-template #noreviews>
+        No Reviews for this Song!
+</ng-template>
+<mat-action-row *ngIf='isAuth'>
+        <button mat-raised-button (click)="openDialog()">
+                <mat-icon> rate_review</mat-icon>Add Review
+        </button>
+</mat-action-row>

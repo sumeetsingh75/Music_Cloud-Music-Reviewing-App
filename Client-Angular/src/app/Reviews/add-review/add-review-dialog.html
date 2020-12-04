@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Reviews this Song!</h1>
+<div mat-dialog-content>
+  <p>What do you think?</p>
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Leave a comment" [(ngModel)]="data.newReview.reviewDesc" required></textarea>
+  </mat-form-field>
+
+  <star-rating checkedcolor="black" value="1" uncheckedcolor="gray" size="24px" readonly="false"
+    (rate)="onRate($event)"></star-rating>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="save()" [mat-dialog-close]="data">OK</button>
+</div>

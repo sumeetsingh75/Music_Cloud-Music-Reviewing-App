@@ -1,0 +1,19 @@
+.login-container{
+
+    border: 1px solid gray;
+    width: 50%;
+    border-radius: 10px;
+    padding: 20px;
+    margin:auto;
+    margin-top: 100px;
+}
+
+.mat-form-field{
+    display: inline;
+    box-sizing: 5px;
+}
+
+.submit-button{
+    background:rgb(85, 214, 132);
+    color:white;
+}

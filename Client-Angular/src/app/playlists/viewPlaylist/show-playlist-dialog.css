@@ -1,0 +1,14 @@
+.mat-card{
+    box-shadow: none;
+    border-bottom: 1px solid #b5a0a0;
+    border-radius: unset;
+}
+.mat-card .mat-card-title{
+    font-family: monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+span{
+    padding:0px 5px;
+}

@@ -1,0 +1,28 @@
+.container_style{
+    position: relative;
+    font-size: 20px;
+    text-align: center;
+    width:60%;
+    float: center;
+    margin: auto;
+    margin-top: 100px;
+}
+
+  .button_style {
+    padding: 15px 20px 15px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color:  #1DB955;
+    border-radius: 40px;
+    letter-spacing: 2px;
+    border: 1px solid #1DB955;
+    color:white;
+}
+
+.button_style:hover {
+    background-color: #1ED759;
+    box-shadow: 3px 3px 10px #8888;
+    color: white;
+}

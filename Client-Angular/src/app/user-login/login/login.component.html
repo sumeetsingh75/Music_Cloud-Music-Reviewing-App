@@ -1,0 +1,19 @@
+<div class="login-container">
+<mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter your email" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>   
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [formControl]="password" required>  
+        <mat-error *ngIf="password.invalid">{{getPasswordMessage()}}</mat-error>        
+</mat-form-field>
+<button mat-raised-button [disabled]="!(email.valid && !password.required)"  class= "submit-button" (click) = 'submit()'>Submit</button>
+<span> or Login With</span>
+<button mat-raised-button class="facebook-button" (click)="socialSignIn('facebook')" >Facebook</button>
+<hr>
+<p>New Users can Register Here!</p>
+<button mat-raised-button class="signup-button" (click)="signup()" >Sign up</button>
+</div>

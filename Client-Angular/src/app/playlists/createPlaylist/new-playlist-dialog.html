@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Create New Playlist!</h1>
+<div mat-dialog-content>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Title" [(ngModel)]='data.playlistInfo.listTitle' required>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Description" [(ngModel)]='data.playlistInfo.listDesc'></textarea>
+  </mat-form-field>
+
+</div>
+
+<h4>Added Songs</h4>
+
+<mat-card *ngFor='let song of data.songsInPlaylist'>
+ 
+  <mat-card-content>
+    <span><b>{{song.songTitle}}</b></span>
+    <button class="plbutton" (click)='onRemoveClicked(song.songId)'>Remove</button>
+  </mat-card-content>
+</mat-card>
+
+<div class="container">
+  <input class="search-bar" placeholder="Search for Songs,Playlists.." [(ngModel)]='songSearchBy' type="text">
+</div>
+
+<mat-dialog-content class="mat-typography">
+
+  <mat-card *ngFor='let song of searchedSongs'>
+    
+    <mat-card-content>
+      <span><b>{{song.songTitle}}</b></span>
+      <button class="plbutton" (click)='onAddClicked(song.songId)'>Add</button>
+    </mat-card-content>
+  </mat-card>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" (click)="save()">Ok</button>
+</div>

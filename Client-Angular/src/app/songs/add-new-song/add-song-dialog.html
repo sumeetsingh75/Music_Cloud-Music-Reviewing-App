@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Add New song!</h1>
+<div mat-dialog-content>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Title" [(ngModel)]="data.newSong.songTitle" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Artist" [(ngModel)]="data.newSong.artist" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Album" [(ngModel)]="data.newSong.album">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput type=number placeholder="Year" [(ngModel)]="data.newSong.year">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Genre" [(ngModel)]="data.newSong.genre">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+
+    <button *ngIf = '!(data.newSong.songTitle == "" || data.newSong.artist == "")' mat-button [mat-dialog-close]="data" (click) = "save()" cdkFocusInitial>Ok</button>
+
+</div>

@@ -1,0 +1,19 @@
+{
+    "/auth": {
+      "target": "http://localhost:3000",
+      "secure": false
+    },
+    "/playlist": {
+        "target": "http://localhost:3000",
+        "secure": false
+      },
+      "/review": {
+        "target": "http://localhost:3000",
+        "secure": false
+      },
+      "/song": {
+        "target": "http://localhost:3000",
+        "secure": false
+      }
+  
+  }
